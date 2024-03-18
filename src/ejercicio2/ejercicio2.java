@@ -1,7 +1,10 @@
 package ejercicio2;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.FileWriter;
@@ -78,6 +81,37 @@ public class ejercicio2 {
             }
         }
 
+
+        BufferedWriter escritor = null;
+        BufferedReader lector = null;
+
+       
+         try {
+            lector = new BufferedReader(new FileReader("dirEjer2//uno.txt"));
+            escritor = new BufferedWriter(new FileWriter("dirEjer2//dos.txt"));
+
+            nombre = lector.readLine();
+
+            while (nombre!=null) {
+
+                System.out.println(nombre+"\n");
+                escritor.write(nombre);
+                nombre = lector.readLine();
+            }
+              
+        } catch (FileNotFoundException e) {
+           System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }finally{
+            if (lector!=null) {
+                lector.close();
+            }
+
+            if (escritor!=null) {
+                escritor.close();
+            } 
+        }
     }
 
 }
